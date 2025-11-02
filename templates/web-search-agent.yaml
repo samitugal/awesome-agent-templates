@@ -45,13 +45,13 @@ tools:
         name: "Agno"
         type: "Official"
         url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/baidusearch.py"
-    - name: "duckduckgo_search_upsonic"
+    - name: "duckduckgo_search"
       description: "DuckDuckGo search integration for Upsonic Framework"
       provider:
         name: "Upsonic"
         type: "Official"
         url: "https://github.com/Upsonic/Upsonic/blob/master/src/upsonic/tools/common_tools/duckduckgo.py"
-    - name: "tavily_search_upsonic"
+    - name: "tavily_search"
       description: "Tavily search integration for Upsonic Framework"
       provider:
         name: "Upsonic"
