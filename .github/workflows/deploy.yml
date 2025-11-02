@@ -5,6 +5,10 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  # Trigger on PR merge (when PR is closed and merged)
+  pull_request_target:
+    types: [closed]
+    branches: [ main, master ]
 
 jobs:
   build-and-test:
@@ -41,13 +45,13 @@ jobs:
         echo "Build successful! Output directory exists."
         
     - name: Deploy to Netlify
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: (github.ref == 'refs/heads/master' && github.event_name == 'push') || (github.event_name == 'pull_request_target' && github.event.pull_request.merged == true)
       uses: nwtgck/actions-netlify@v3.0
       with:
         publish-dir: './out'
         production-branch: master
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        deploy-message: "Deploy from GitHub Actions"
+        deploy-message: "${{ github.event_name == 'pull_request_target' && format('Deploy PR #{0}: {1}', github.event.pull_request.number, github.event.pull_request.title) || 'Deploy from GitHub Actions' }}"
         enable-pull-request-comment: false
         enable-commit-comment: true
       env:
