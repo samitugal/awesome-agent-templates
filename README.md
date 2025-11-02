@@ -8,7 +8,7 @@
 
 **Define once, run anywhere — the open standard for AI Agents.**
 
-[🌐 Website](https://awesome-agent-templates.netlify.app) • [📖 Docs](#-about) • [🤝 Contribute](CONTRIBUTING.md) • [💬 Community](https://github.com/samitugal/awesome-agent-templates/discussions)
+[🌐 Website](https://samitugal.github.io/awesome-agent-templates) • [📖 Docs](#-about) • [🤝 Contribute](CONTRIBUTING.md) • [💬 Community](https://github.com/samitugal/awesome-agent-templates/discussions)
 
 </div>
 
@@ -42,12 +42,12 @@ So I created this repo to make things simpler a single place for reusable, share
 
 ### Agent Templates
 Reusable YAML definitions for different agent types:
-- [Warren Buffett Agent](https://awesome-agent-templates.netlify.app) — Investment analysis and financial advice  
-- [Web Search Agent](https://awesome-agent-templates.netlify.app) — Find and summarize information from the web  
-- [Retrieval Agent](https://awesome-agent-templates.netlify.app) — Query and retrieve information from databases  
-- [Code Executor Agent](https://awesome-agent-templates.netlify.app) — Run, test, and debug code safely  
-- [Command Agent](https://awesome-agent-templates.netlify.app) — Execute system commands and operations  
-- [Orchestrator Agent](https://awesome-agent-templates.netlify.app) — Coordinate multiple agents and workflows  
+- [Warren Buffett Agent](https://samitugal.github.io/awesome-agent-templates) — Investment analysis and financial advice  
+- [Web Search Agent](https://samitugal.github.io/awesome-agent-templates) — Find and summarize information from the web  
+- [Retrieval Agent](https://samitugal.github.io/awesome-agent-templates) — Query and retrieve information from databases  
+- [Code Executor Agent](https://samitugal.github.io/awesome-agent-templates) — Run, test, and debug code safely  
+- [Command Agent](https://samitugal.github.io/awesome-agent-templates) — Execute system commands and operations  
+- [Orchestrator Agent](https://samitugal.github.io/awesome-agent-templates) — Coordinate multiple agents and workflows  
 
 Each template follows a simple schema — name, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
 
