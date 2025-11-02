@@ -10,7 +10,7 @@
     "lint": "next lint",
     "export": "next build && next export",
     "generate-schema": "ts-node scripts/generate-schema.ts",
-    "vercel-build": "npm run generate-schema && next build",
+    "vercel-build": "next build",
     "preview": "next build && next start"
   },
   "dependencies": {

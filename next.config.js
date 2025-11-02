@@ -12,7 +12,7 @@ const nextConfig = {
   basePath: '',
   // Enable experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled due to build issues
   },
   // Compress output
   compress: true,
