@@ -8,7 +8,7 @@
 
 **Define once, run anywhere — the open standard for AI Agents.**
 
-[🌐 Website](https://awesome-agent-templates.vercel.app) • [📖 Docs](#-about) • [🤝 Contribute](#-how-to-contribute) • [💬 Community](#-community)
+[🌐 Website](https://awesome-agent-templates.vercel.app) • [📖 Docs](#-about) • [🤝 Contribute](CONTRIBUTING.md) • [💬 Community](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)
 
 </div>
 
@@ -30,15 +30,11 @@ Whether you’re using **LangChain**, **Semantic Kernel**, **CrewAI**, **Agno**,
 
 ## Why It Exists
 
-The AI world moves fast — but agent development is still fragmented.  
-Every framework reinvents the wheel. Every developer writes the same boilerplate.
+While working on different AI projects, I kept running into the same loop building the same kinds of agents over and over. Copy, paste, tweak, repeat. It got old fast.  
 
-We believe:
-- **Standards accelerate progress**
-- **Knowledge grows when shared**
-- **Good ideas should be reusable**
+So I created this repo to make things simpler a single place for reusable, shareable agent templates.  
 
-Our goal is to build the **open standard for agent definitions** — a foundation every framework can build on.
+**Build once, use everywhere.**
 
 ---
 
@@ -46,11 +42,12 @@ Our goal is to build the **open standard for agent definitions** — a foundatio
 
 ### Agent Templates
 Reusable YAML definitions for different agent types:
-- WebSearchAgent — find and summarize information  
-- PlannerAgent — break goals into tasks  
-- CodeExecutorAgent — run & test code  
-- SummarizerAgent — condense long content  
-- PersonaAgent — act with a specific role or tone  
+- [Warren Buffett Agent](https://awesome-agent-templates.vercel.app/agents/warren-buffett-agent) — Investment analysis and financial advice  
+- [Web Search Agent](https://awesome-agent-templates.vercel.app/agents/websearch-agent) — Find and summarize information from the web  
+- [Retrieval Agent](https://awesome-agent-templates.vercel.app/agents/retrieval-agent) — Query and retrieve information from databases  
+- [Code Executor Agent](https://awesome-agent-templates.vercel.app/agents/code-executor-agent) — Run, test, and debug code safely  
+- [Command Agent](https://awesome-agent-templates.vercel.app/agents/command-agent) — Execute system commands and operations  
+- [Orchestrator Agent](https://awesome-agent-templates.vercel.app/agents/orchestrator-agent) — Coordinate multiple agents and workflows  
 
 Each template follows a simple schema — name, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
 
@@ -59,13 +56,7 @@ Write once, deploy anywhere.
 Each agent can run across multiple ecosystems: LangChain, Semantic Kernel, CrewAI, Agno, AutoGen, or even custom MCP setups.
 
 ### Beautiful Interface
-Browse templates visually, just like [prompts.chat](https://prompts.chat) —  
-but with more power: reasoning filters, framework compatibility, YAML previews, and clickable provider icons (Agno, SK, etc.).
-
-### Evolving Into Code
-The next evolution?  
-Agent generation.  
-You’ll soon be able to choose a framework and language (Python, C#, JS) — and automatically generate runnable code from our templates.
+Browse templates visually, just like [prompts.chat](https://prompts.chat)
 
 ---
 
@@ -110,7 +101,7 @@ Join us if you believe in:
 
 ---
 
-## 🔮 Future Works
+## Future Works
 
 The *Awesome Agent Templates* project is designed to evolve with the community and we’re already trying to explore ambitious next steps.
 
@@ -135,9 +126,6 @@ aat generate WebSearchAgent --framework semantic-kernel --lang python
 
 ### Connect
 - **GitHub Discussions:** [awesome-agent-templates/discussions](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)  
-- **Discord:** Coming soon!  
-- **Twitter / X:** [@AwesomeAgents](https://twitter.com/AwesomeAgents)  
-- **Newsletter:** Agent insights, monthly highlights, and new templates  
 
 ---
 
@@ -153,4 +141,5 @@ We highlight:
 ---
 
 
-## Acknowledgments - Inspired by [awesome-prompts](https://github.com/f/awesome-chatgpt-prompts)
+## Acknowledgments 
+Inspired by [awesome-prompts](https://github.com/f/awesome-chatgpt-prompts)
