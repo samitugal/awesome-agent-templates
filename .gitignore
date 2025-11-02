@@ -108,7 +108,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/ - Commented out to allow TypeScript lib folder
 lib64/
 parts/
 sdist/
