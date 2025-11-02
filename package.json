@@ -11,7 +11,6 @@
     "lint": "next lint",
     "export": "next build",
     "generate-schema": "ts-node scripts/generate-schema.ts",
-    "vercel-build": "next build",
     "preview": "next build && next start",
     "copy-templates": "node -e \"const fs = require('fs'); const path = require('path'); if (!fs.existsSync('public/templates')) fs.mkdirSync('public/templates', {recursive: true}); fs.readdirSync('templates').filter(f => f.endsWith('.yaml')).forEach(f => fs.copyFileSync(path.join('templates', f), path.join('public/templates', f)));\""
   },
