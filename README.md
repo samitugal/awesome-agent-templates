@@ -42,12 +42,12 @@ So I created this repo to make things simpler a single place for reusable, share
 
 ### Agent Templates
 Reusable YAML definitions for different agent types:
-- [Warren Buffett Agent](https://awesome-agent-templates.vercel.app/agents/warren-buffett-agent) — Investment analysis and financial advice  
-- [Web Search Agent](https://awesome-agent-templates.vercel.app/agents/websearch-agent) — Find and summarize information from the web  
-- [Retrieval Agent](https://awesome-agent-templates.vercel.app/agents/retrieval-agent) — Query and retrieve information from databases  
-- [Code Executor Agent](https://awesome-agent-templates.vercel.app/agents/code-executor-agent) — Run, test, and debug code safely  
-- [Command Agent](https://awesome-agent-templates.vercel.app/agents/command-agent) — Execute system commands and operations  
-- [Orchestrator Agent](https://awesome-agent-templates.vercel.app/agents/orchestrator-agent) — Coordinate multiple agents and workflows  
+- [Warren Buffett Agent](https://awesome-agent-templates.netlify.app) — Investment analysis and financial advice  
+- [Web Search Agent](https://awesome-agent-templates.netlify.app) — Find and summarize information from the web  
+- [Retrieval Agent](https://awesome-agent-templates.netlify.app) — Query and retrieve information from databases  
+- [Code Executor Agent](https://awesome-agent-templates.netlify.app) — Run, test, and debug code safely  
+- [Command Agent](https://awesome-agent-templates.netlify.app) — Execute system commands and operations  
+- [Orchestrator Agent](https://awesome-agent-templates.netlify.app) — Coordinate multiple agents and workflows  
 
 Each template follows a simple schema — name, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
 

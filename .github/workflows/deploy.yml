@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build and Deploy to Netlify
 
 on:
   push:
@@ -39,3 +39,17 @@ jobs:
           exit 1
         fi
         echo "Build successful! Output directory exists."
+        
+    - name: Deploy to Netlify
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      uses: nwtgck/actions-netlify@v3.0
+      with:
+        publish-dir: './out'
+        production-branch: master
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: false
+        enable-commit-comment: true
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
