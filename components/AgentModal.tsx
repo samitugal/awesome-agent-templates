@@ -279,7 +279,7 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                           <div className="flex items-center gap-2">
                             <div className="w-4 h-4 relative flex items-center justify-center bg-muted rounded-sm border border-border/20">
                               <Image
-                                src={getProviderIconUrl(tool.provider.name)}
+                                src={tool.provider.type === 'Community' ? getProviderIconUrl('community') : getProviderIconUrl(tool.provider.name)}
                                 alt={tool.provider.name}
                                 width={16}
                                 height={16}
@@ -313,7 +313,7 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                           <div className="flex items-center gap-2">
                             <div className="w-4 h-4 relative flex items-center justify-center bg-muted rounded-sm border border-border/20">
                               <Image
-                                src={getProviderIconUrl(tool.provider.name)}
+                                src={tool.provider.type === 'Community' ? getProviderIconUrl('community') : getProviderIconUrl(tool.provider.name)}
                                 alt={tool.provider.name}
                                 width={16}
                                 height={16}
@@ -386,7 +386,7 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                         <div className="flex items-center gap-2">
                           <div className="w-4 h-4 relative flex items-center justify-center bg-muted rounded-sm border border-border/20">
                             <Image
-                              src={getProviderIconUrl(server.provider.name)}
+                              src={server.provider.type === 'Community' ? getProviderIconUrl('community') : getProviderIconUrl(server.provider.name)}
                               alt={server.provider.name}
                               width={16}
                               height={16}
