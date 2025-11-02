@@ -30,7 +30,7 @@ export default function AgentCard({ agent, slug, onSelect }: AgentCardProps) {
   }
 
   const handleOpenGithub = () => {
-    window.open(`https://github.com/awesome-agent-templates/awesome-agent-templates/blob/main/templates/${slug}.yaml`, '_blank')
+    window.open(`https://github.com/samitugal/awesome-agent-templates/blob/main/templates/${slug}.yaml`, '_blank')
   }
 
   return (

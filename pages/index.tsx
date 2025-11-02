@@ -118,7 +118,7 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
               
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/awesome-agent-templates/awesome-agent-templates"
+                  href="https://github.com/samitugal/awesome-agent-templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
