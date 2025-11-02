@@ -18,10 +18,10 @@
 
 **Awesome Agent Templates** is a community project that aims to make **AI agent development simple, reusable, and open**.
 
-Think of it as *“the GitHub of AI agents.”*  
-We collect, standardize, and share high-quality **agent templates** so anyone can build and run powerful AI systems — without starting from scratch.
 
-Whether you’re using **LangChain**, **Semantic Kernel**, **CrewAI**, **Agno**, or any MCP-compatible platform, you’ll find reusable agent blueprints here.
+We collect, standardize, and share high-quality **agent templates** so anyone can build and run powerful AI systems without starting from scratch.
+
+Whether you’re using **LangChain**, **Semantic Kernel**, **CrewAI**, **Agno**, **Upsonic**, or any MCP-compatible platform, you’ll find reusable agent blueprints here.
 
 > One language for all agents.  
 > One format, infinite possibilities.
@@ -53,7 +53,7 @@ Each template follows a simple schema — name, tools, reasoning level, memory s
 
 ### Framework Agnostic
 Write once, deploy anywhere.  
-Each agent can run across multiple ecosystems: LangChain, Semantic Kernel, CrewAI, Agno, AutoGen, or even custom MCP setups.
+Each agent can run across multiple ecosystems: LangChain, Semantic Kernel, CrewAI, Agno, Upsonic, or even custom MCP setups.
 
 ### Beautiful Interface
 Browse templates visually, just like [prompts.chat](https://prompts.chat)
@@ -91,10 +91,9 @@ Open a discussion for:
 
 ## Community
 
-We’re building a place where AI engineers, researchers, and creators share what they learn — not just code, but ideas.
+We’re building a place where AI engineers, researchers, and creators share what they find useful tips and templates.
 
 Join us if you believe in:
-- Collaboration over competition  
 - Open knowledge for everyone  
 - Building things that last  
 
@@ -134,9 +133,6 @@ aat generate WebSearchAgent --framework semantic-kernel --lang python
 Every contributor is a builder of the open-agent future.  
 We highlight:
 - Featured Contributors — monthly showcase  
-- Hall of Fame — best community templates  
-- Swag drops & recognition
-
 
 ---
 

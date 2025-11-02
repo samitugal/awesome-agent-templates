@@ -157,18 +157,6 @@ metadata:
 We celebrate our contributors!
 
 - **Featured Contributors**: Monthly spotlight
-- **Hall of Fame**: Best templates get permanent recognition
-- **Impact Metrics**: See how many people use your templates
-
-## Community Guidelines
-
-Our community is built on:
-
-- ** Respect**: Treat everyone with kindness and respect
-- **Learning**: Help others learn and grow
-- **Sharing**: Share knowledge freely and openly
-- **Inclusion**: Welcome people from all backgrounds
-- **Innovation**: Push the boundaries of what's possible
 
 ### Code of Conduct
 
@@ -242,8 +230,6 @@ npm run export          # Static site export
 Need help with your contribution?
 
 - **GitHub Discussions**: [Ask questions](https://github.com/samitugal/awesome-agent-templates/discussions)
-- **Discord**: Coming soon!
-- **Email**: [contributors@awesome-agent-templates.org](mailto:contributors@awesome-agent-templates.org)
 
 ## License
 
@@ -251,4 +237,4 @@ By contributing to Awesome Agent Templates, you agree that your contributions wi
 
 ---
 
-**Thank you for helping build the future of AI agents! **
+**Thank you for helping build standardized AI agents! **
