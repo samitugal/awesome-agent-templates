@@ -1,6 +1,5 @@
 {
-  "buildCommand": "npm run vercel-build",
-  "outputDirectory": "out",
+  "buildCommand": "npm run build",
   "installCommand": "npm install",
   "cleanUrls": true,
   "trailingSlash": false,
