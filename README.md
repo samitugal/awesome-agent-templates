@@ -8,7 +8,7 @@
 
 **Define once, run anywhere — the open standard for AI Agents.**
 
-[🌐 Website](https://awesome-agent-templates.vercel.app) • [📖 Docs](#-about) • [🤝 Contribute](CONTRIBUTING.md) • [💬 Community](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)
+[🌐 Website](https://awesome-agent-templates.netlify.app) • [📖 Docs](#-about) • [🤝 Contribute](CONTRIBUTING.md) • [💬 Community](https://github.com/samitugal/awesome-agent-templates/discussions)
 
 </div>
 
@@ -125,7 +125,7 @@ aat generate WebSearchAgent --framework semantic-kernel --lang python
 ---
 
 ### Connect
-- **GitHub Discussions:** [awesome-agent-templates/discussions](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)  
+- **GitHub Discussions:** [samitugal/awesome-agent-templates/discussions](https://github.com/samitugal/awesome-agent-templates/discussions)  
 
 ---
 

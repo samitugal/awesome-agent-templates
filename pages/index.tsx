@@ -318,7 +318,7 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
               <p className="text-sm text-muted-foreground">
                 Contribute on{' '}
                 <a
-                  href="https://github.com/awesome-agent-templates/awesome-agent-templates"
+                  href="https://github.com/samitugal/awesome-agent-templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary/80 transition-colors"

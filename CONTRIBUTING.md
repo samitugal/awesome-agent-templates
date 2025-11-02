@@ -53,9 +53,9 @@ Have you built an amazing agent? Share it with the community!
 ### Report Issues
 
 Found a bug or have a suggestion?
-- **Bug Reports**: [Open an issue](https://github.com/awesome-agent-templates/awesome-agent-templates/issues/new?template=bug_report.md)
-- **Feature Requests**: [Open an issue](https://github.com/awesome-agent-templates/awesome-agent-templates/issues/new?template=feature_request.md)
-- **Questions**: [Start a discussion](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)
+- **Bug Reports**: [Open an issue](https://github.com/samitugal/awesome-agent-templates/issues/new?template=bug_report.md)
+- **Feature Requests**: [Open an issue](https://github.com/samitugal/awesome-agent-templates/issues/new?template=feature_request.md)
+- **Questions**: [Start a discussion](https://github.com/samitugal/awesome-agent-templates/discussions)
 
 ### Improve Documentation
 
@@ -241,7 +241,7 @@ npm run export          # Static site export
 
 Need help with your contribution?
 
-- **GitHub Discussions**: [Ask questions](https://github.com/awesome-agent-templates/awesome-agent-templates/discussions)
+- **GitHub Discussions**: [Ask questions](https://github.com/samitugal/awesome-agent-templates/discussions)
 - **Discord**: Coming soon!
 - **Email**: [contributors@awesome-agent-templates.org](mailto:contributors@awesome-agent-templates.org)
 
