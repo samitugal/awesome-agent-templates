@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run export",
+  "buildCommand": "npm run build",
   "outputDirectory": "out",
   "installCommand": "npm install",
   "cleanUrls": true,
