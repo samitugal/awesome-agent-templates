@@ -17,7 +17,7 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
 
   useEffect(() => {
     if (isOpen && slug) {
-      fetch(`/api/agents/${slug}/raw`)
+      fetch(`/templates/${slug}.yaml`)
         .then(res => res.text())
         .then(setYamlContent)
         .catch(console.error)

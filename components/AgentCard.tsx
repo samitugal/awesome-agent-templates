@@ -20,7 +20,7 @@ export default function AgentCard({ agent, slug, onSelect }: AgentCardProps) {
 
   const handleCopyTemplate = async () => {
     try {
-      const response = await fetch(`/api/agents/${slug}/raw`)
+      const response = await fetch(`/templates/${slug}.yaml`)
       const yamlContent = await response.text()
       await navigator.clipboard.writeText(yamlContent)
       // You could add a toast notification here
