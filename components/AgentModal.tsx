@@ -17,10 +17,21 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
 
   useEffect(() => {
     if (isOpen && slug) {
+      console.log('Fetching YAML for slug:', slug)
       fetch(`/templates/${slug}.yaml`)
-        .then(res => res.text())
-        .then(setYamlContent)
-        .catch(console.error)
+        .then(res => {
+          console.log('Response status:', res.status)
+          console.log('Response headers:', res.headers.get('content-type'))
+          return res.text()
+        })
+        .then(content => {
+          console.log('YAML content length:', content.length)
+          console.log('YAML content preview:', content.substring(0, 100))
+          setYamlContent(content)
+        })
+        .catch(error => {
+          console.error('Error fetching YAML:', error)
+        })
     }
   }, [isOpen, slug])
 

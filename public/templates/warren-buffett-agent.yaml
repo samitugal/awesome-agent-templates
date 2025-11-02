@@ -75,15 +75,6 @@ metadata:
   template_version: "1.0.0"
   last_updated: "2025-11-02"
   schema_compatibility: "v1.0"
-  related_agents:
-    - "WebSearchAgent"
-    - "RetrievalAgent"
-    - "OrchestratorAgent"
-  compatible_frameworks:
-    - "LangChain"
-    - "Semantic Kernel"
-    - "Agno"
-    - "AutoGen"
-    - "CrewAI"
-    - "Upsonic"
+  related_agents: []
+  compatible_frameworks: ["LangChain", "Semantic Kernel", "CrewAI", "Agno", "Upsonic"]
   author: "https://github.com/samitugal"
