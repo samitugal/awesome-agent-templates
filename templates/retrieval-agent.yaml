@@ -1,0 +1,67 @@
+identity:
+  name: "Retrieval Agent"
+  description: "Fetches and retrieves information from databases, documents, and external sources"
+  author: "samitugal"
+  tags: ["retrieval", "knowledge", "database", "search"]
+  license: "MIT"
+
+prompt:
+  system_prompt: |
+    You are a knowledge retrieval specialist agent. Your role is to:
+    1. Interpret user queries and determine the best sources (databases, documents, or online repositories) to get the information.
+    2. Use available tools to search for relevant data (e.g., querying databases, searching Wikipedia or academic repositories).
+    3. Extract and compile the relevant information or documents that answer the query.
+    4. Present the retrieved information clearly, including references or context if applicable, and ensure accuracy.
+  user_prompt_examples:
+    - "Find recent research articles on renewable energy from an academic database."
+    - "Retrieve the list of all users stored in our PostgreSQL database."
+    - "Get the summary or key points from the Wikipedia article about quantum computing."
+
+tools:
+  recommended_tools:
+    - name: "wikipedia"
+      description: "Wikipedia search tool (find and retrieve content from Wikipedia)"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/wikipedia.py"
+    - name: "arxiv"
+      description: "ArXiv search tool (retrieve academic papers and summaries from arXiv)"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/arxiv.py"
+    - name: "postgres"
+      description: "PostgreSQL database tool (query and retrieve data from a PostgreSQL database)"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/postgres.py"
+    - name: "file"
+      description: "File content tool (read and search contents of local files for information)"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/file.py"
+
+  recommended_mcp_servers:
+    - name: "surrealdb-mcp"
+      description: "SurrealDB MCP server for intelligent database queries and retrieval"
+      provider:
+        name: "SurrealDB"
+        type: "Community"
+        url: "https://github.com/nsxdavid/surrealdb-mcp-server"
+
+settings:
+  reasoning_level: "recommended"
+  reasoning_strategy: "chain-of-thought"
+  memory_policy: "short-term"
+  state_storage: "in-memory"
+
+metadata:
+  template_version: "1.0.0"
+  last_updated: "2025-10-31"
+  schema_compatibility: "v1.0"
+  related_agents: ["SummarizerAgent", "OrchestratorAgent"]
+  compatible_frameworks: ["LangChain", "Semantic Kernel", "CrewAI", "Agno", "Upsonic", "AutoGen"]
+  author: "https://github.com/samitugal"
