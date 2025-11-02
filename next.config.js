@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Vercel handles deployment automatically, no need for static export
-  // output: 'export', // Disabled for Vercel deployment
+  // Static export for static hosting
+  output: 'export',
   trailingSlash: false,
   images: {
-    // unoptimized: true, // Let Vercel handle image optimization
+    unoptimized: true, // Required for static export
     domains: ['github.com', 'raw.githubusercontent.com']
   },
   // Vercel deployment settings

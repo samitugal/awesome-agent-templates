@@ -1,14 +1,9 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run export",
+  "outputDirectory": "out",
   "installCommand": "npm install",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/api/agents/:slug/raw",
-      "destination": "/api/agents/[slug]/raw"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
