@@ -42,12 +42,12 @@ So I created this repo to make things simpler a single place for reusable, share
 
 ### Agent Templates
 Reusable YAML definitions for different agent types:
-- [Warren Buffett Agent](https://awesome-agent-templates.com) — Investment analysis and financial advice  
-- [Web Search Agent](https://awesome-agent-templates.com) — Find and summarize information from the web  
-- [Retrieval Agent](https://awesome-agent-templates.com) — Query and retrieve information from databases  
-- [Code Executor Agent](https://awesome-agent-templates.com) — Run, test, and debug code safely  
-- [Command Agent](https://awesome-agent-templates.com) — Execute system commands and operations  
-- [Orchestrator Agent](https://awesome-agent-templates.com) — Coordinate multiple agents and workflows  
+- [Warren Buffett Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Finance/warren-buffett-agent.yaml) — Investment analysis and financial advice  
+- [Web Search Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Research/web-search-agent.yaml) — Find and summarize information from the web  
+- [Retrieval Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Data%20Analysis/retrieval-agent.yaml) — Query and retrieve information from databases  
+- [Code Executor Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Development/code-executor-agent.yaml) — Run, test, and debug code safely  
+- [Command Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Automation/command-agent.yaml) — Execute system commands and operations  
+- [Orchestrator Agent](https://github.com/samitugal/awesome-agent-templates/blob/main/templates/Development/orchestrator-agent.yaml) — Coordinate multiple agents and workflows  
 
 Each template follows a simple schema — name, purpose, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
 
