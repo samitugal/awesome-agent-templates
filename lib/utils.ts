@@ -1,8 +1,22 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { AGENT_CATEGORIES, CategoryName } from './constants'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export function getCategoryColor(category: string, type: 'color' | 'hoverColor' | 'activeColor' = 'color'): string {
+  const categoryData = AGENT_CATEGORIES[category as CategoryName]
+  if (!categoryData) {
+    // Default color for unknown categories
+    return type === 'activeColor' 
+      ? 'bg-gray-500 text-white border-gray-500'
+      : type === 'hoverColor'
+      ? 'hover:bg-gray-500/20'
+      : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
+  }
+  return categoryData[type]
 }
 
 export function formatDate(date: string): string {

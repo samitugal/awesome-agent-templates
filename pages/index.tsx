@@ -8,24 +8,26 @@ import AgentCard from '@/components/AgentCard'
 import AgentModal from '@/components/AgentModal'
 import TagManager from '@/components/TagManager'
 import ContributeCard from '@/components/ContributeCard'
-import { cn, getProviderIconUrl, getFrameworkUrl } from '@/lib/utils'
+import { cn, getProviderIconUrl, getFrameworkUrl, getCategoryColor } from '@/lib/utils'
 import Image from 'next/image'
 
 interface HomeProps {
   agents: AgentWithSlug[]
+  allCategories: string[]
   allTags: string[]
   allFrameworks: string[]
   allReasoningLevels: string[]
 }
 
-export default function Home({ agents, allTags, allFrameworks, allReasoningLevels }: HomeProps) {
+export default function Home({ agents, allCategories, allTags, allFrameworks, allReasoningLevels }: HomeProps) {
   const [selectedAgent, setSelectedAgent] = useState<{ agent: AgentWithSlug; slug: string } | null>(null)
-  const [darkMode, setDarkMode] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState<SearchFilters>({
     query: '',
     reasoning_level: [],
     frameworks: [],
+    categories: [],
     tags: []
   })
   const [availableTags, setAvailableTags] = useState<string[]>(allTags)
@@ -39,6 +41,11 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
         if (!searchText.includes(query)) return false
       }
 
+
+      // Category filter
+      if (filters.categories.length > 0) {
+        if (!filters.categories.includes(agent.identity.category)) return false
+      }
 
       // Framework filter
       if (filters.frameworks.length > 0) {
@@ -89,6 +96,7 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
       query: '',
       reasoning_level: [],
       frameworks: [],
+      categories: [],
       tags: []
     })
   }
@@ -172,9 +180,9 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
             >
               <Filter className="w-4 h-4" />
               Filters
-              {(filters.frameworks.length + filters.tags.length) > 0 && (
+              {(filters.categories.length + filters.frameworks.length + filters.tags.length) > 0 && (
                 <span className="bg-primary-foreground text-primary text-xs px-1.5 py-0.5 rounded-full">
-                  {filters.frameworks.length + filters.tags.length}
+                  {filters.categories.length + filters.frameworks.length + filters.tags.length}
                 </span>
               )}
             </button>
@@ -193,10 +201,32 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
                 </button>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Frameworks */}
+              <div className="space-y-6">
+                {/* Categories */}
                 <div>
-                  <h4 className="font-medium mb-3">Frameworks</h4>
+                  <h4 className="font-medium mb-3">Categories</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {allCategories.map(category => (
+                      <button
+                        key={category}
+                        onClick={() => toggleFilter('categories', category)}
+                        className={cn(
+                          "px-3 py-2 rounded-md border transition-all duration-200 hover:scale-105 text-sm font-medium",
+                          filters.categories.includes(category)
+                            ? getCategoryColor(category, 'activeColor')
+                            : cn(getCategoryColor(category, 'color'), getCategoryColor(category, 'hoverColor'))
+                        )}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Frameworks */}
+                  <div>
+                    <h4 className="font-medium mb-3">Frameworks</h4>
                   <div className="flex flex-wrap gap-1">
                     {allFrameworks.map(framework => (
                       <button
@@ -228,18 +258,19 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
                         <span className="text-sm font-medium">{framework}</span>
                       </button>
                     ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Tags */}
-                <div>
-                  <h4 className="font-medium mb-3">Tags</h4>
-                  <TagManager
-                    selectedTags={filters.tags}
-                    availableTags={availableTags}
-                    onTagsChange={handleTagsChange}
-                    placeholder="Search or add new tags..."
-                  />
+                  {/* Tags */}
+                  <div>
+                    <h4 className="font-medium mb-3">Tags</h4>
+                    <TagManager
+                      selectedTags={filters.tags}
+                      availableTags={availableTags}
+                      onTagsChange={handleTagsChange}
+                      placeholder="Search or add new tags..."
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -251,10 +282,21 @@ export default function Home({ agents, allTags, allFrameworks, allReasoningLevel
               <p className="text-muted-foreground">
                 {filteredAgents.length} of {agents.length} agents
               </p>
-              {filters.tags.length > 0 && (
+              {(filters.categories.length > 0 || filters.tags.length > 0) && (
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-muted-foreground">Filtered by:</span>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 flex-wrap">
+                    {filters.categories.map(category => (
+                      <span
+                        key={category}
+                        className={cn(
+                          "inline-flex items-center px-2 py-1 text-xs rounded-full border",
+                          getCategoryColor(category, 'color')
+                        )}
+                      >
+                        {category}
+                      </span>
+                    ))}
                     {filters.tags.map(tag => (
                       <span
                         key={tag}
@@ -346,6 +388,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const agents = getAllAgents()
   
   // Extract unique values for filters
+  const allCategories = Array.from(new Set(agents.map(agent => agent.identity.category).filter(Boolean))).sort()
   const allTags = Array.from(new Set(agents.flatMap(agent => agent.identity.tags))).sort()
   const allFrameworks = Array.from(new Set(agents.flatMap(agent => agent.metadata.compatible_frameworks || []))).sort()
   const allReasoningLevels = ['none', 'optional', 'recommended', 'mandatory']
@@ -353,6 +396,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       agents,
+      allCategories,
       allTags,
       allFrameworks,
       allReasoningLevels

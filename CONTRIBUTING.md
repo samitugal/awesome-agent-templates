@@ -17,11 +17,36 @@ Have you built an amazing agent? Share it with the community!
    cd awesome-agent-templates
    ```
 
-2. **Create Your Agent Template**
+2. **Choose or Create a Category**
+   
+   Templates are organized by category in folders:
+   ```
+   templates/
+   ├── Development/
+   ├── Research/
+   ├── Data Analysis/
+   ├── Automation/
+   ├── Productivity/
+   └── Finance/
+   ```
+   
+   **Choose an existing category** or **create a new one**:
+   ```bash
+   # Use existing category
+   cd templates/Development
+   
+   # OR create a new category
+   mkdir templates/"Your Category Name"
+   cd templates/"Your Category Name"
+   ```
+
+3. **Create Your Agent Template**
    ```bash
    # Copy an existing template as a starting point
-   cp templates/websearch-agent.yaml templates/your-agent-name.yaml
+   cp templates/Research/web-search-agent.yaml templates/YourCategory/your-agent-name.yaml
    ```
+   
+   **Important**: The category is automatically assigned from the folder name. **Do not include a `category` field** in your YAML file.
 
 3. **Fill in Your Agent Details**
    Follow our [template schema](#template-schema) and include:
@@ -39,7 +64,7 @@ Have you built an amazing agent? Share it with the community!
 
 5. **Submit Your Contribution**
    ```bash
-   git add templates/your-agent-name.yaml
+   git add templates/YourCategory/your-agent-name.yaml
    git commit -m "Add [YourAgentName]: Brief description"
    git push origin main
    ```
@@ -95,9 +120,11 @@ Every agent template must follow this structure:
 identity:
   name: "Your Agent Name"              # Clear, descriptive name
   description: "What this agent does"  # Max 150 characters
+  purpose: "One-line purpose"          # Brief purpose statement
   author: "your-github-username"       # Your GitHub username
   tags: ["tag1", "tag2", "tag3"]      # Searchable keywords
   license: "MIT"                       # Open source license
+  # NOTE: Do NOT include 'category' - it's auto-assigned from folder name
 
 prompt:
   system_prompt: |                     # Main instructions
@@ -143,6 +170,25 @@ metadata:
   author: "https://github.com/your-username"
 ```
 
+### Category Guidelines
+
+**Folder-Based Categories**: Categories are automatically assigned from the folder structure.
+
+- Place your agent in the appropriate category folder
+- Create a new category folder if none fit your agent
+- Use clear, descriptive category names (e.g., "Customer Support", "Data Analysis")
+- The folder name becomes the category badge in the UI
+
+**Existing Categories**:
+- **Development** - Code execution, development tools
+- **Research** - Web search, information gathering
+- **Data Analysis** - Data processing, analytics
+- **Automation** - Task automation, workflows
+- **Productivity** - Organization, coordination
+- **Finance** - Financial analysis, investing
+- **Creative** - Content creation, design
+- **Customer Support** - Support, assistance
+
 ### Quality Standards
 
 - **Originality**: Don't copy existing templates
@@ -151,6 +197,7 @@ metadata:
 - **Testing**: Verify your template works
 - **Ethics**: Follow AI ethics guidelines
 - **Licensing**: Use open source licenses (MIT preferred)
+- **Category**: Place in the correct folder (no category field in YAML)
 
 ## Recognition
 
@@ -216,8 +263,10 @@ npm run export          # Static site export
 
 ### PR Checklist
 
+- [ ] Template is in the correct category folder
 - [ ] Template follows the schema
-- [ ] All required fields are filled
+- [ ] All required fields are filled (including `purpose`)
+- [ ] **No `category` field in YAML** (auto-assigned from folder)
 - [ ] Template validates successfully
 - [ ] Description is clear and under 150 characters
 - [ ] Tags are relevant and searchable

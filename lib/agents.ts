@@ -15,26 +15,41 @@ export function getAllAgents(): AgentWithSlug[] {
     return []
   }
 
-  const filenames = fs.readdirSync(templatesDirectory)
-  const yamlFiles = filenames.filter(name => name.endsWith('.yaml') || name.endsWith('.yml'))
-
-  const agents: AgentWithSlug[] = yamlFiles.map(filename => {
-    const filePath = path.join(templatesDirectory, filename)
-    const fileContents = fs.readFileSync(filePath, 'utf8')
-    
-    try {
-      const agent = yaml.load(fileContents) as AgentTemplate
-      const slug = slugify(agent.identity.name)
+  const agents: AgentWithSlug[] = []
+  
+  // Read all category folders
+  const entries = fs.readdirSync(templatesDirectory, { withFileTypes: true })
+  
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      // This is a category folder
+      const category = entry.name
+      const categoryPath = path.join(templatesDirectory, category)
+      const files = fs.readdirSync(categoryPath)
+      const yamlFiles = files.filter(name => name.endsWith('.yaml') || name.endsWith('.yml'))
       
-      return {
-        ...agent,
-        slug
+      for (const filename of yamlFiles) {
+        const filePath = path.join(categoryPath, filename)
+        const fileContents = fs.readFileSync(filePath, 'utf8')
+        
+        try {
+          const agent = yaml.load(fileContents) as AgentTemplate
+          const slug = slugify(agent.identity.name)
+          
+          // Auto-assign category from folder name
+          agent.identity.category = category
+          
+          agents.push({
+            ...agent,
+            slug
+          })
+        } catch (error) {
+          console.error(`Error parsing ${category}/${filename}:`, error)
+          throw new Error(`Failed to parse agent template: ${category}/${filename}`)
+        }
       }
-    } catch (error) {
-      console.error(`Error parsing ${filename}:`, error)
-      throw new Error(`Failed to parse agent template: ${filename}`)
     }
-  })
+  }
 
   return agents.sort((a, b) => {
     // Sort by last_updated date in descending order (newest first)
@@ -56,20 +71,28 @@ export function getAgentRawYaml(slug: string): string | null {
   
   if (!agent) return null
 
-  const filenames = fs.readdirSync(templatesDirectory)
-  const yamlFiles = filenames.filter(name => name.endsWith('.yaml') || name.endsWith('.yml'))
+  // Read from category folders
+  const entries = fs.readdirSync(templatesDirectory, { withFileTypes: true })
   
-  for (const filename of yamlFiles) {
-    const filePath = path.join(templatesDirectory, filename)
-    const fileContents = fs.readFileSync(filePath, 'utf8')
-    
-    try {
-      const parsedAgent = yaml.load(fileContents) as AgentTemplate
-      if (slugify(parsedAgent.identity.name) === slug) {
-        return fileContents
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const categoryPath = path.join(templatesDirectory, entry.name)
+      const files = fs.readdirSync(categoryPath)
+      const yamlFiles = files.filter(name => name.endsWith('.yaml') || name.endsWith('.yml'))
+      
+      for (const filename of yamlFiles) {
+        const filePath = path.join(categoryPath, filename)
+        const fileContents = fs.readFileSync(filePath, 'utf8')
+        
+        try {
+          const parsedAgent = yaml.load(fileContents) as AgentTemplate
+          if (slugify(parsedAgent.identity.name) === slug) {
+            return fileContents
+          }
+        } catch (error) {
+          continue
+        }
       }
-    } catch (error) {
-      continue
     }
   }
   

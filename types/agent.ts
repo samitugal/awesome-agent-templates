@@ -1,6 +1,8 @@
 export interface AgentIdentity {
   name: string
   description: string
+  purpose: string
+  category: string
   author: string
   tags: string[]
   license: string
@@ -80,5 +82,6 @@ export interface SearchFilters {
   query: string
   reasoning_level: string[]
   frameworks: string[]
+  categories: string[]
   tags: string[]
 }

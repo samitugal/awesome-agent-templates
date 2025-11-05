@@ -1,6 +1,7 @@
 identity:
   name: "Retrieval Agent"
   description: "Fetches and retrieves information from databases, documents, and external sources"
+  purpose: "Query and retrieve data from various sources"
   author: "samitugal"
   tags: ["retrieval", "knowledge", "database", "search"]
   license: "MIT"

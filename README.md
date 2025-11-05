@@ -49,14 +49,20 @@ Reusable YAML definitions for different agent types:
 - [Command Agent](https://samitugal.github.io/awesome-agent-templates) — Execute system commands and operations  
 - [Orchestrator Agent](https://samitugal.github.io/awesome-agent-templates) — Coordinate multiple agents and workflows  
 
-Each template follows a simple schema — name, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
+Each template follows a simple schema — name, purpose, tools, reasoning level, memory settings, metadata — everything an agent needs to come alive.
+
+**Categories are automatically assigned** from the folder structure, making it easy to organize and discover agents.
 
 ### Framework Agnostic
 Write once, deploy anywhere.  
 Each agent can run across multiple ecosystems: LangChain, Semantic Kernel, CrewAI, Agno, Upsonic, or even custom MCP setups.
 
 ### Beautiful Interface
-Browse templates visually, just like [prompts.chat](https://prompts.chat)
+Browse templates visually with:
+- Color-coded categories
+- GitHub profile integration
+- Smart filtering and search
+- Responsive design
 
 ---
 
@@ -65,12 +71,33 @@ Browse templates visually, just like [prompts.chat](https://prompts.chat)
 **We’re a community project, your ideas shape this ecosystem.**
 
 ### Add a New Agent
-1. Fork the repo  
-2. Copy `templates/example-agent.yaml`  
-3. Fill in your agent’s details  
-4. Submit a PR with a clear description  
 
-We’ll validate it, review it, and feature it on the site!
+Templates are organized by category in folders:
+```
+templates/
+├── Development/
+├── Research/
+├── Data Analysis/
+├── Automation/
+├── Productivity/
+└── Finance/
+```
+
+1. **Fork the repo**
+2. **Choose or create a category folder**
+   ```bash
+   # Use existing category
+   cd templates/Development
+   
+   # OR create new category
+   mkdir templates/"Your Category"
+   ```
+3. **Create your agent YAML** (category is auto-assigned from folder)
+4. **Submit a PR** with a clear description
+
+We'll validate it, review it, and feature it on the site!
+
+📖 **Full guide:** See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
 
 ### Improve the Docs
 - Add new built-in tools

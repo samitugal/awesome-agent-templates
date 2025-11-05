@@ -16,13 +16,14 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
   const [activeTab, setActiveTab] = useState<'overview' | 'yaml'>('overview')
 
   useEffect(() => {
-    if (isOpen && slug) {
-      fetch(`/templates/${slug}.yaml`)
+    if (isOpen && slug && agent) {
+      const category = agent.identity.category
+      fetch(`/templates/${category}/${slug}.yaml`)
         .then(res => res.text())
         .then(setYamlContent)
         .catch(console.error)
     }
-  }, [isOpen, slug])
+  }, [isOpen, slug, agent])
 
   const handleCopyYaml = async () => {
     try {
@@ -34,8 +35,9 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
   }
 
   const handleOpenGithub = () => {
-    if (slug) {
-      window.open(`https://github.com/samitugal/awesome-agent-templates/blob/main/templates/${slug}.yaml`, '_blank')
+    if (slug && agent) {
+      const category = agent.identity.category
+      window.open(`https://github.com/samitugal/awesome-agent-templates/blob/main/templates/${category}/${slug}.yaml`, '_blank')
     }
   }
 
@@ -58,23 +60,30 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopyYaml}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
-              title="Copy YAML"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors group relative"
+              title="Copy YAML template"
             >
               <Copy className="w-5 h-5" />
+              <span className="absolute -bottom-8 right-0 px-2 py-1 text-xs bg-gray-900 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Copy YAML
+              </span>
             </button>
             
             <button
               onClick={handleOpenGithub}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors group relative"
               title="View on GitHub"
             >
               <Github className="w-5 h-5" />
+              <span className="absolute -bottom-8 right-0 px-2 py-1 text-xs bg-gray-900 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Open in GitHub
+              </span>
             </button>
             
             <button
               onClick={onClose}
               className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              title="Close"
             >
               <X className="w-5 h-5" />
             </button>
@@ -112,13 +121,13 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
           {activeTab === 'overview' ? (
             <div className="p-6 space-y-6">
               {/* Basic Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <Settings className="w-5 h-5" />
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Settings className="w-5 h-5 text-primary" />
                     Configuration
                   </h3>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Reasoning Level:</span>
                       <span className={cn(
@@ -144,29 +153,29 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <Database className="w-5 h-5" />
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Database className="w-5 h-5 text-primary" />
                     Metadata
                   </h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Version:</span>
-                      <span className="text-foreground">{agent.metadata.template_version}</span>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground text-sm">Version:</span>
+                      <span className="text-foreground font-medium">{agent.metadata.template_version}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Author:</span>
-                      <span className="text-foreground">{agent.identity.author}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">License:</span>
-                      <span className="text-foreground">{agent.identity.license}</span>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground text-sm">Author:</span>
+                      <span className="text-foreground font-medium">{agent.identity.author}</span>
                     </div>
                     {agent.metadata.last_updated && (
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Updated:</span>
-                        <span className="text-foreground">{formatDate(agent.metadata.last_updated)}</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground text-sm">Updated:</span>
+                        <span className="text-foreground font-medium">{formatDate(agent.metadata.last_updated)}</span>
                       </div>
                     )}
+                    <div className="flex justify-between items-center pt-2 border-t border-border/50">
+                      <span className="text-muted-foreground text-xs">License:</span>
+                      <span className="text-muted-foreground text-xs">{agent.identity.license}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -178,13 +187,16 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                   {agent.identity.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 text-sm bg-secondary text-secondary-foreground rounded-md"
+                      className="px-3 py-1.5 text-sm bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors cursor-pointer"
+                      title={`Filter by ${tag}`}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
+
+              <div className="border-t border-border/50 pt-6"></div>
 
               {/* Compatible Frameworks */}
               <div>
@@ -233,6 +245,8 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                 </div>
               </div>
 
+              <div className="border-t border-border/50 pt-6"></div>
+
               {/* Example Prompts */}
               {agent.prompt.user_prompt_examples && agent.prompt.user_prompt_examples.length > 0 && (
                 <div>
@@ -247,11 +261,19 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
                 </div>
               )}
 
+              <div className="border-t border-border/50 pt-6"></div>
+
+              {/* Integrations Section */}
+              <div>
+                <h2 className="text-xl font-bold mb-1">Integrations</h2>
+                <p className="text-sm text-muted-foreground mb-6">Required tools and services for this agent</p>
+              </div>
+
               {/* Tools */}
               {(agent.tools.required_tools || agent.tools.recommended_tools) && ((agent.tools.required_tools && agent.tools.required_tools.length > 0) || (agent.tools.recommended_tools && agent.tools.recommended_tools.length > 0)) && (
                 <div>
                   <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <Zap className="w-5 h-5" />
+                    <Zap className="w-5 h-5 text-primary" />
                     Recommended Tools
                   </h3>
                   <div className="space-y-3">
@@ -360,7 +382,7 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
               {agent.tools.recommended_mcp_servers && agent.tools.recommended_mcp_servers.length > 0 && (
                 <div>
                   <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <Database className="w-5 h-5" />
+                    <Database className="w-5 h-5 text-primary" />
                     Recommended MCP Servers
                   </h3>
                   <div className="space-y-3">
@@ -410,9 +432,20 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
             </div>
           ) : (
             <div className="p-6">
-              <div className="bg-muted rounded-md p-4">
-                <pre className="text-sm text-foreground font-mono overflow-x-auto">
-                  {yamlContent}
+              <div className="mb-4">
+                <p className="text-sm text-muted-foreground">
+                  Auto-generated YAML configuration for deployment. Copy this template to use with your preferred AI framework.
+                </p>
+              </div>
+              <div className="bg-muted rounded-md p-4 relative group">
+                <button
+                  onClick={handleCopyYaml}
+                  className="absolute top-3 right-3 px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/90"
+                >
+                  Copy YAML
+                </button>
+                <pre className="text-sm text-foreground font-mono overflow-x-auto pr-24">
+                  {yamlContent || 'Loading...'}
                 </pre>
               </div>
             </div>
