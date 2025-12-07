@@ -342,7 +342,6 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
                   agent={agent}
                   slug={agent.slug}
                   onSelect={handleAgentSelect}
-                  onGenerateCode={handleGenerateCode}
                 />
               ))
             ) : (
