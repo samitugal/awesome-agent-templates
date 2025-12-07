@@ -63,29 +63,29 @@ export function getProviderIcon(providerName: string): string {
 }
 
 export function getProviderIconUrl(providerName: string): string {
-  const basePath = process.env.NODE_ENV === 'production' ? '/awesome-agent-templates' : ''
+  // Custom domain kullanıldığı için basePath'e gerek yok
   const iconUrls: Record<string, string> = {
-    'langchain': `${basePath}/icons/langchain.png`,
-    'semantic kernel': `${basePath}/icons/semantic-kernel.png`,
-    'semantic-kernel': `${basePath}/icons/semantic-kernel.png`,
-    'crewai': `${basePath}/icons/crewai.png`, 
-    'autogen': `${basePath}/icons/autogen.png`,
-    'agno': `${basePath}/icons/agno.png`,
-    'upsonic': `${basePath}/icons/upsonic.png`,
-    'mcp': `${basePath}/icons/mcp.png`,
-    'tavily': `${basePath}/icons/tavily.png`,
-    'brave': `${basePath}/icons/brave.png`,
-    'baidu': `${basePath}/icons/baidu.png`,
-    'beautifulsoup': `${basePath}/icons/beautifulsoup.png`,
-    'openai': `${basePath}/icons/openai.png`,
-    'anthropic': `${basePath}/icons/anthropic.png`,
-    'huggingface': `${basePath}/icons/huggingface.png`,
-    'custom': `${basePath}/icons/custom.png`,
-    'builtin': `${basePath}/icons/builtin.png`,
-    'community': `${basePath}/icons/github.png`
+    'langchain': '/icons/langchain.png',
+    'semantic kernel': '/icons/semantic-kernel.png',
+    'semantic-kernel': '/icons/semantic-kernel.png',
+    'crewai': '/icons/crewai.png', 
+    'autogen': '/icons/autogen.png',
+    'agno': '/icons/agno.png',
+    'upsonic': '/icons/upsonic.png',
+    'mcp': '/icons/mcp.png',
+    'tavily': '/icons/tavily.png',
+    'brave': '/icons/brave.png',
+    'baidu': '/icons/baidu.png',
+    'beautifulsoup': '/icons/beautifulsoup.png',
+    'openai': '/icons/openai.png',
+    'anthropic': '/icons/anthropic.png',
+    'huggingface': '/icons/huggingface.png',
+    'custom': '/icons/custom.png',
+    'builtin': '/icons/builtin.png',
+    'community': '/icons/github.png'
   }
   
-  return iconUrls[providerName.toLowerCase()] || `${basePath}/icons/default.png`
+  return iconUrls[providerName.toLowerCase()] || '/icons/default.png'
 }
 
 export function getFrameworkUrl(frameworkName: string): string {
