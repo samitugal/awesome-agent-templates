@@ -2,16 +2,17 @@ import { AgentTemplate } from '@/types/agent'
 import { AgentWithSlug } from '@/lib/agents'
 import { cn, getReasoningLevelColor, getProviderIconUrl, getCategoryColor } from '@/lib/utils'
 import { AGENT_CONSTANTS } from '@/lib/constants'
-import { ExternalLink, Copy, Github, Eye } from 'lucide-react'
+import { ExternalLink, Copy, Github, Eye, Code } from 'lucide-react'
 import Image from 'next/image'
 
 interface AgentCardProps {
   agent: AgentWithSlug
   slug: string
   onSelect: (agent: AgentWithSlug, slug: string) => void
+  onGenerateCode?: (agent: AgentWithSlug) => void
 }
 
-export default function AgentCard({ agent, slug, onSelect }: AgentCardProps) {
+export default function AgentCard({ agent, slug, onSelect, onGenerateCode }: AgentCardProps) {
   const handleViewDetails = () => {
     if (onSelect) {
       onSelect(agent, slug)
@@ -126,16 +127,31 @@ export default function AgentCard({ agent, slug, onSelect }: AgentCardProps) {
             @{githubUsername}
           </a>
         </div>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleOpenGithub();
-          }}
-          className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 transition-colors flex-shrink-0"
-          title="View on GitHub"
-        >
-          <Github className="w-3 h-3" />
-        </button>
+        <div className="flex items-center gap-1 flex-shrink-0">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onGenerateCode) {
+                onGenerateCode(agent);
+              }
+            }}
+            className="px-2 py-1 text-xs bg-primary text-primary-foreground rounded hover:bg-primary/80 transition-colors flex items-center gap-1"
+            title="Generate Code"
+          >
+            <Code className="w-3 h-3" />
+            <span className="hidden sm:inline">Code</span>
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenGithub();
+            }}
+            className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 transition-colors flex-shrink-0"
+            title="View on GitHub"
+          >
+            <Github className="w-3 h-3" />
+          </button>
+        </div>
       </div>
     </div>
   )

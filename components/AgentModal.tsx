@@ -1,6 +1,6 @@
 import { AgentTemplate } from '@/types/agent'
 import { cn, getReasoningLevelColor, getProviderIconUrl, getFrameworkUrl, formatDate } from '@/lib/utils'
-import { X, Eye, Copy, Github, ExternalLink, Zap, Database, Lightbulb, Settings, Brain } from 'lucide-react'
+import { X, Eye, Copy, Github, ExternalLink, Zap, Database, Lightbulb, Settings, Brain, Code } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
@@ -9,9 +9,10 @@ interface AgentModalProps {
   slug: string | null
   isOpen: boolean
   onClose: () => void
+  onGenerateCode?: (agent: AgentTemplate) => void
 }
 
-export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalProps) {
+export default function AgentModal({ agent, slug, isOpen, onClose, onGenerateCode }: AgentModalProps) {
   const [yamlContent, setYamlContent] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'overview' | 'yaml'>('overview')
 
@@ -58,6 +59,20 @@ export default function AgentModal({ agent, slug, isOpen, onClose }: AgentModalP
           </div>
           
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                if (onGenerateCode && agent) {
+                  onClose()
+                  onGenerateCode(agent)
+                }
+              }}
+              className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium"
+              title="Generate Code"
+            >
+              <Code className="w-4 h-4" />
+              Generate Code
+            </button>
+            
             <button
               onClick={handleCopyYaml}
               className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors group relative"

@@ -6,6 +6,7 @@ import { getAllAgents, AgentWithSlug } from '@/lib/agents'
 import { SearchFilters } from '@/types/agent'
 import AgentCard from '@/components/AgentCard'
 import AgentModal from '@/components/AgentModal'
+import CodeGeneratorModal from '@/components/CodeGeneratorModal'
 import TagManager from '@/components/TagManager'
 import ContributeCard from '@/components/ContributeCard'
 import { cn, getProviderIconUrl, getFrameworkUrl, getCategoryColor } from '@/lib/utils'
@@ -21,6 +22,7 @@ interface HomeProps {
 
 export default function Home({ agents, allCategories, allTags, allFrameworks, allReasoningLevels }: HomeProps) {
   const [selectedAgent, setSelectedAgent] = useState<{ agent: AgentWithSlug; slug: string } | null>(null)
+  const [codeGeneratorAgent, setCodeGeneratorAgent] = useState<AgentWithSlug | null>(null)
   const [darkMode, setDarkMode] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState<SearchFilters>({
@@ -64,6 +66,10 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
 
   const handleAgentSelect = (agent: AgentWithSlug, slug: string) => {
     setSelectedAgent({ agent, slug })
+  }
+
+  const handleGenerateCode = (agent: AgentWithSlug) => {
+    setCodeGeneratorAgent(agent)
   }
 
   const toggleFilter = (type: keyof SearchFilters, value: string) => {
@@ -336,6 +342,7 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
                   agent={agent}
                   slug={agent.slug}
                   onSelect={handleAgentSelect}
+                  onGenerateCode={handleGenerateCode}
                 />
               ))
             ) : (
@@ -378,6 +385,14 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
           slug={selectedAgent?.slug || null}
           isOpen={!!selectedAgent}
           onClose={() => setSelectedAgent(null)}
+          onGenerateCode={(agent) => setCodeGeneratorAgent(agent as AgentWithSlug)}
+        />
+
+        {/* Code Generator Modal */}
+        <CodeGeneratorModal
+          agent={codeGeneratorAgent}
+          isOpen={!!codeGeneratorAgent}
+          onClose={() => setCodeGeneratorAgent(null)}
         />
       </div>
     </div>

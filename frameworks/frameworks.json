@@ -1,0 +1,96 @@
+{
+  "frameworks": [
+    {
+      "id": "langchain",
+      "displayName": "LangChain",
+      "language": "python",
+      "packageManager": "pip",
+      "defaultDependencies": [
+        "langchain-openai"
+      ],
+      "defaultModel": "gpt-4.1-mini",
+      "templates": [
+        {
+          "id": "basic_agent",
+          "fileName": "langchain_agent.py",
+          "description": "Single-file LangChain ChatOpenAI agent with system prompt and REPL loop.",
+          "template": "import os\nfrom langchain_openai import ChatOpenAI\n\nSYSTEM_PROMPT = \"\"\"{{SYSTEM_PROMPT}}\"\"\"\n\n\ndef build_model():\n    api_key = os.getenv(\"OPENAI_API_KEY\")\n    if not api_key:\n        raise RuntimeError(\"Please set OPENAI_API_KEY environment variable.\")\n    return ChatOpenAI(model=\"{{MODEL_NAME}}\", api_key=api_key)\n\n\ndef main():\n    llm = build_model()\n    print(\"{{AGENT_NAME}} is ready. Type 'exit' to quit.\\n\")\n\n    while True:\n        user_input = input(\"You: \").strip()\n        if user_input.lower() in {\"exit\", \"quit\"}:\n            break\n\n        response = llm.invoke(user_input)\n        print(f\"{{AGENT_NAME}}: {response}\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+        }
+      ]
+    },
+    {
+      "id": "semantic-kernel",
+      "displayName": "Semantic Kernel",
+      "language": "python",
+      "packageManager": "pip",
+      "defaultDependencies": [
+        "semantic-kernel",
+        "openai"
+      ],
+      "defaultModel": "gpt-4.1-mini",
+      "templates": [
+        {
+          "id": "basic_agent",
+          "fileName": "sk_agent.py",
+          "description": "Semantic Kernel Python agent using OpenAIChatCompletion and a simple loop.",
+          "template": "import asyncio\n\nfrom semantic_kernel import Kernel\nfrom semantic_kernel.connectors.ai import PromptExecutionSettings\nfrom semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion\nfrom semantic_kernel.functions import KernelArguments\n\nSYSTEM_PROMPT = \"\"\"{{SYSTEM_PROMPT}}\"\"\"\n\n\nasync def main():\n    kernel = Kernel()\n\n    kernel.add_service(OpenAIChatCompletion(ai_model_id=\"{{MODEL_NAME}}\"))\n\n    print(\"{{AGENT_NAME}} is ready. Type 'exit' to quit.\\n\")\n\n    while True:\n        user_input = input(\"You: \").strip()\n        if user_input.lower() in {\"exit\", \"quit\"}:\n            break\n\n        full_prompt = f\"{SYSTEM_PROMPT}\\n\\nUser: {user_input}\\nAssistant:\"\n\n        answer = await kernel.invoke_prompt(\n            full_prompt,\n            arguments=KernelArguments(\n                settings=PromptExecutionSettings()\n            ),\n        )\n\n        print(f\"{{AGENT_NAME}}: {answer}\\n\")\n\n\nif __name__ == \"__main__\":\n    asyncio.run(main())\n"
+        }
+      ]
+    },
+    {
+      "id": "crewai",
+      "displayName": "CrewAI",
+      "language": "python",
+      "packageManager": "pip",
+      "defaultDependencies": [
+        "crewai"
+      ],
+      "defaultModel": "gpt-4o-mini",
+      "templates": [
+        {
+          "id": "basic_agent",
+          "fileName": "crewai_agent.py",
+          "description": "Single CrewAI agent + one task, runs once from console input.",
+          "template": "from crewai import Agent, Task, Crew, Process\n\nSYSTEM_PROMPT = \"\"\"{{SYSTEM_PROMPT}}\"\"\"\n\n\ndef build_agent() -> Agent:\n    return Agent(\n        role=\"{{AGENT_NAME}}\",\n        goal=\"Follow the system instructions and help the user.\",\n        backstory=SYSTEM_PROMPT,\n        llm=\"{{MODEL_NAME}}\",\n        verbose=True,\n    )\n\n\ndef main():\n    agent = build_agent()\n\n    print(\"{{AGENT_NAME}} is ready. Type your request.\\n\")\n    user_input = input(\"You: \").strip()\n\n    task = Task(\n        description=user_input,\n        expected_output=\"A helpful and concise answer.\",\n        agent=agent,\n    )\n\n    crew = Crew(\n        agents=[agent],\n        tasks=[task],\n        process=Process.sequential,\n        verbose=True,\n    )\n\n    result = crew.kickoff()\n    print(f\"\\n{{AGENT_NAME}}: {result}\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+        }
+      ]
+    },
+    {
+      "id": "agno",
+      "displayName": "Agno",
+      "language": "python",
+      "packageManager": "pip",
+      "defaultDependencies": [
+        "agno",
+        "python-dotenv"
+      ],
+      "defaultModel": "gpt-4.1-mini",
+      "templates": [
+        {
+          "id": "basic_agent",
+          "fileName": "agno_agent.py",
+          "description": "Agno Agent with OpenAIChat backend and interactive loop.",
+          "template": "import os\nfrom dotenv import load_dotenv\n\nfrom agno.agent import Agent\nfrom agno.models.openai import OpenAIChat\n\nSYSTEM_PROMPT = \"\"\"{{SYSTEM_PROMPT}}\"\"\"\n\n\ndef build_agent() -> Agent:\n    load_dotenv(override=True)\n\n    api_key = os.getenv(\"OPENAI_API_KEY\")\n    if not api_key:\n        raise RuntimeError(\"Please set OPENAI_API_KEY environment variable.\")\n\n    return Agent(\n        model=OpenAIChat(id=\"{{MODEL_NAME}}\", api_key=api_key),\n        description=SYSTEM_PROMPT,\n        tools=[],\n        markdown=True,\n    )\n\n\ndef main():\n    agent = build_agent()\n    print(\"{{AGENT_NAME}} is ready. Type 'exit' to quit.\\n\")\n\n    while True:\n        query = input(\"You: \").strip()\n        if query.lower() in {\"exit\", \"quit\"}:\n            break\n\n        response = agent.run(query)\n        text = getattr(response, \"content\", str(response))\n        print(f\"{{AGENT_NAME}}: {text}\\n\")\n\n\nif __name__ == \"__main__\":\n    main()\n"
+        }
+      ]
+    },
+    {
+      "id": "upsonic",
+      "displayName": "Upsonic",
+      "language": "python",
+      "packageManager": "pip",
+      "defaultDependencies": [
+        "upsonic"
+      ],
+      "defaultModel": "openai/gpt-4o",
+      "templates": [
+        {
+          "id": "basic_agent",
+          "fileName": "upsonic_agent.py",
+          "description": "Minimal Upsonic Agent + Task using system prompt baked into the task.",
+          "template": "from upsonic import Agent, Task\n\nSYSTEM_PROMPT = \"\"\"{{SYSTEM_PROMPT}}\"\"\"\n\n\ndef build_agent() -> Agent:\n    return Agent(\n        model=\"{{MODEL_NAME}}\",\n        name=\"{{AGENT_NAME}}\",\n    )\n\n\ndef main():\n    agent = build_agent()\n    print(\"{{AGENT_NAME}} is ready. Type your request.\\n\")\n\n    user_input = input(\"You: \").strip()\n    task = Task(description=f\"{SYSTEM_PROMPT}\\n\\nUser: {user_input}\")\n\n    agent.print_do(task)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+        }
+      ]
+    }
+  ]
+}
