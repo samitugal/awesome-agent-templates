@@ -8,23 +8,39 @@ Each category has its own folder, and agent templates are placed inside their re
 
 ```
 templates/
-├── Development/
-│   └── code-executor-agent.yaml
-├── Research/
-│   └── web-search-agent.yaml
-├── Data Analysis/
-│   ├── retrieval-agent.yaml
-│   └── warren-buffett-agent.yaml
 ├── Automation/
+│   ├── browser-automation-agent.yaml
 │   └── command-agent.yaml
-└── Productivity/
-    └── orchestrator-agent.yaml
+├── Creative/
+│   └── content-writer-agent.yaml
+├── Customer Support/
+│   └── support-triage-agent.yaml
+├── Data Analysis/
+│   ├── data-visualization-agent.yaml
+│   ├── retrieval-agent.yaml
+│   └── sql-analyst-agent.yaml
+├── Development/
+│   ├── code-executor-agent.yaml
+│   ├── code-review-agent.yaml
+│   ├── orchestrator-agent.yaml
+│   └── test-generator-agent.yaml
+├── DevOps/
+│   └── sre-incident-agent.yaml
+├── Finance/
+│   └── warren-buffett-agent.yaml
+├── Productivity/
+│   └── meeting-notes-agent.yaml
+├── Research/
+│   ├── academic-research-agent.yaml
+│   └── web-search-agent.yaml
+└── Security/
+    └── security-audit-agent.yaml
 ```
 
 ## Adding a New Agent
 
 1. **Choose or Create a Category**: 
-   - Use an existing category folder (Development, Research, Data Analysis, Automation, Productivity, Creative, Customer Support)
+   - Use an existing category folder (Automation, Creative, Customer Support, Data Analysis, Development, DevOps, Finance, Productivity, Research, Security)
    - Or create a new category folder with a descriptive name
 
 2. **Create Your Agent YAML File**:
@@ -98,8 +114,14 @@ Categories are automatically assigned colors in the UI. Current categories:
 - **Productivity** - Pink
 - **Research** - Indigo
 - **Automation** - Cyan
+- **Finance** - Amber
+- **DevOps** - Sky
+- **Security** - Red
 
-New categories will get a default gray color until added to the color mapping.
+New categories will get a default gray color until added to `AGENT_CATEGORIES` in
+[`lib/constants.ts`](../lib/constants.ts). Because those color classes are written as literal
+strings in `lib/`, that directory is included in the Tailwind `content` globs — do not remove it
+or every category badge will render colorless after purge.
 
 ## Guidelines
 

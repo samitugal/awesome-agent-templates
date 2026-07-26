@@ -49,6 +49,21 @@ export const AGENT_CATEGORIES = {
     color: 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20',
     hoverColor: 'hover:bg-cyan-500/20',
     activeColor: 'bg-cyan-500 text-white border-cyan-500'
+  },
+  Finance: {
+    color: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
+    hoverColor: 'hover:bg-amber-500/20',
+    activeColor: 'bg-amber-500 text-white border-amber-500'
+  },
+  DevOps: {
+    color: 'bg-sky-500/10 text-sky-500 border-sky-500/20',
+    hoverColor: 'hover:bg-sky-500/20',
+    activeColor: 'bg-sky-500 text-white border-sky-500'
+  },
+  Security: {
+    color: 'bg-red-500/10 text-red-500 border-red-500/20',
+    hoverColor: 'hover:bg-red-500/20',
+    activeColor: 'bg-red-500 text-white border-red-500'
   }
 } as const;
 

@@ -4,6 +4,9 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    // Category and status colors are declared as literal class strings in lib/,
+    // so lib must be scanned or every badge renders colorless after purge.
+    './lib/**/*.{js,ts}',
   ],
   darkMode: 'class',
   theme: {
