@@ -128,6 +128,60 @@ tools:
         name: "berlinbra"
         type: "Community"
         url: "https://github.com/berlinbra/alpha-vantage-mcp"
+    - name: "yfinance_toolkit"
+      description: "Yahoo Finance quotes, fundamentals, and analyst data for Agno agents"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/yfinance.py"
+    - name: "openbb_toolkit"
+      description: "OpenBB financial data platform integration for market and fundamental data"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/openbb.py"
+    - name: "financial_datasets_toolkit"
+      description: "Structured income statements, balance sheets, and cash flow statements"
+      provider:
+        name: "Agno"
+        type: "Official"
+        url: "https://github.com/agno-agi/agno/blob/main/libs/agno/agno/tools/financial_datasets.py"
+    - name: "financial_tools"
+      description: "Financial data and analysis tools for the Upsonic Framework"
+      provider:
+        name: "Upsonic"
+        type: "Official"
+        url: "https://github.com/Upsonic/Upsonic/blob/master/src/upsonic/tools/common_tools/financial_tools.py"
+    - name: "YahooFinanceNewsTool"
+      description: "Company news headlines from Yahoo Finance for LangChain agents"
+      provider:
+        name: "LangChain"
+        type: "Official"
+        url: "https://github.com/langchain-ai/langchain-community/blob/main/libs/community/langchain_community/tools/yahoo_finance_news.py"
+    - name: "PolygonToolkit"
+      description: "Polygon.io market data: aggregates, last quote, and financials"
+      provider:
+        name: "LangChain"
+        type: "Official"
+        url: "https://github.com/langchain-ai/langchain-community/tree/main/libs/community/langchain_community/tools/polygon"
+    - name: "FinancialDatasetsToolkit"
+      description: "Balance sheet, income statement, and cash flow retrieval in LangChain"
+      provider:
+        name: "LangChain"
+        type: "Official"
+        url: "https://github.com/langchain-ai/langchain-community/tree/main/libs/community/langchain_community/tools/financial_datasets"
+    - name: "SerperDevTool"
+      description: "Search recent filings, earnings coverage, and market commentary"
+      provider:
+        name: "CrewAI"
+        type: "Official"
+        url: "https://github.com/crewAIInc/crewAI-tools/tree/main/crewai_tools/tools/serper_dev_tool"
+    - name: "PDFSearchTool"
+      description: "Semantic search inside 10-K, 10-Q, and annual report PDFs"
+      provider:
+        name: "CrewAI"
+        type: "Official"
+        url: "https://github.com/crewAIInc/crewAI-tools/tree/main/crewai_tools/tools/pdf_search_tool"
 
   recommended_mcp_servers:
     - name: "yfinance-mcp"
