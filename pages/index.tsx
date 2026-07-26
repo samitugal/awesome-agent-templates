@@ -376,6 +376,9 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
 
           {/* Agent Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Leads the grid — at the end it sat below 19 cards and went unseen */}
+            <ContributeCard templateCount={agents.length} />
+
             {filteredAgents.length > 0 ? (
               filteredAgents.map((agent) => (
                 <AgentCard
@@ -394,9 +397,6 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
                 </p>
               </div>
             )}
-
-            {/* Contribute card trails the library so real templates lead */}
-            <ContributeCard templateCount={agents.length} />
           </div>
         </div>
 
