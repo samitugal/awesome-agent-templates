@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Search, Filter, Moon, Sun, Github, ExternalLink } from 'lucide-react'
@@ -33,6 +33,27 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
     tags: []
   })
   const [availableTags, setAvailableTags] = useState<string[]>(allTags)
+
+  // Restore the saved theme, falling back to the OS preference. Without this the
+  // toggle resets to light on every page load.
+  const [themeReady, setThemeReady] = useState(false)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    setDarkMode(
+      saved === 'dark' || saved === 'light'
+        ? saved === 'dark'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+    )
+    setThemeReady(true)
+  }, [])
+
+  // Guarded so the initial render does not persist the default before the saved
+  // value has been read back.
+  useEffect(() => {
+    if (!themeReady) return
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light')
+  }, [darkMode, themeReady])
 
   const filteredAgents = useMemo(() => {
     return agents.filter(agent => {
@@ -153,9 +174,17 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
             
             {/* Subtitle */}
             <p className="text-muted-foreground mt-2 max-w-2xl">
-              Framework-agnostic standard and public template library for AI Agents. 
+              Framework-agnostic standard and public template library for AI Agents.
               <span className="font-medium text-primary"> Define once, run anywhere.</span>
             </p>
+
+            {/* Library at a glance */}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 mt-3 text-sm text-muted-foreground">
+              <span><strong className="text-foreground">{agents.length}</strong> templates</span>
+              <span><strong className="text-foreground">{allCategories.length}</strong> categories</span>
+              <span><strong className="text-foreground">{allFrameworks.length}</strong> frameworks</span>
+              <span><strong className="text-foreground">{allTags.length}</strong> tags</span>
+            </div>
           </div>
         </header>
 
@@ -194,6 +223,42 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
             </button>
           </div>
 
+          {/* Category chips — primary navigation for the library, always visible */}
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <button
+              onClick={() => setFilters(prev => ({ ...prev, categories: [] }))}
+              className={cn(
+                "px-3 py-1.5 rounded-full border text-sm font-medium transition-all duration-200",
+                filters.categories.length === 0
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border text-muted-foreground hover:bg-muted"
+              )}
+            >
+              All
+              <span className="ml-1.5 opacity-70">{agents.length}</span>
+            </button>
+            {allCategories.map(category => {
+              const count = agents.filter(a => a.identity.category === category).length
+              const active = filters.categories.includes(category)
+              return (
+                <button
+                  key={category}
+                  onClick={() => toggleFilter('categories', category)}
+                  aria-pressed={active}
+                  className={cn(
+                    "px-3 py-1.5 rounded-full border text-sm font-medium transition-all duration-200",
+                    active
+                      ? getCategoryColor(category, 'activeColor')
+                      : cn(getCategoryColor(category, 'color'), getCategoryColor(category, 'hoverColor'))
+                  )}
+                >
+                  {category}
+                  <span className="ml-1.5 opacity-70">{count}</span>
+                </button>
+              )
+            })}
+          </div>
+
           {/* Filter Panel */}
           {showFilters && (
             <div className="bg-card border border-border rounded-lg p-4 mb-6 animate-fade-in">
@@ -208,27 +273,6 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
               </div>
               
               <div className="space-y-6">
-                {/* Categories */}
-                <div>
-                  <h4 className="font-medium mb-3">Categories</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {allCategories.map(category => (
-                      <button
-                        key={category}
-                        onClick={() => toggleFilter('categories', category)}
-                        className={cn(
-                          "px-3 py-2 rounded-md border transition-all duration-200 hover:scale-105 text-sm font-medium",
-                          filters.categories.includes(category)
-                            ? getCategoryColor(category, 'activeColor')
-                            : cn(getCategoryColor(category, 'color'), getCategoryColor(category, 'hoverColor'))
-                        )}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Frameworks */}
                   <div>
@@ -319,7 +363,7 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Powered by</span>
               <a
-                href="https://github.com/awesome-agent-templates"
+                href="https://github.com/samitugal/awesome-agent-templates"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
@@ -331,10 +375,7 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
           </div>
 
           {/* Agent Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Contribute Card - Always first */}
-            <ContributeCard templateCount={agents.length} />
-            
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredAgents.length > 0 ? (
               filteredAgents.map((agent) => (
                 <AgentCard
@@ -353,6 +394,9 @@ export default function Home({ agents, allCategories, allTags, allFrameworks, al
                 </p>
               </div>
             )}
+
+            {/* Contribute card trails the library so real templates lead */}
+            <ContributeCard templateCount={agents.length} />
           </div>
         </div>
 

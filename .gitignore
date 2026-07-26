@@ -126,3 +126,7 @@ env/
 
 # Local Netlify folder
 .netlify
+
+# Playwright MCP scratch output
+.playwright-mcp/
+tsconfig.tsbuildinfo
